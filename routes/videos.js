@@ -53,4 +53,52 @@ router.get('/:id', (req, res) => {
         res.status(500).json({message: "Error while fetching video data"});
     }
 });
+
+router.post("/", (req, res)=>{
+    console.log("came here", req.body);
+    try {
+        const {title, image, description} = req.body;
+        console.log(req.body);
+        const postVideo = {
+            id: uuid4(),
+            title: title || "Video Title",
+            image: image || "http://localhost:8080/images/thumbnail.jpg",
+            description: description || "Video Description",
+            channel: "Shifu Panda",
+            views: "980,544",
+            likes: "22,479",
+            duration: "4:01",
+            timestamp: Date.now(),
+            comments: [
+                {
+                    "id": uuid4(),
+                    "name": "Sharia Pova",
+                    "comment": "Your travel diaries are like a passport to wanderlust! Each city comes alive through your lens, making me feel like I'm right there with you. Your storytelling captures the essence of these enchanting places, igniting a desire to explore Europe even more. Can't wait for the next adventure!",
+                    "likes": 0,
+                    "timestamp": 1690348662000
+                  },
+                  {
+                    "id": uuid4(),
+                    "name": "Hateeje",
+                    "comment": "Your videos are a true escape for the soul. Watching this feels like taking a scenic stroll through the charming streets of Europe. Thank you for bringing the magic of travel to our screens!",
+                    "likes": 0,
+                    "timestamp": 1690262262000
+                  },
+                  {
+                    "id": uuid4(),
+                    "name": "Adnan Al-Burj",
+                    "comment": "I appreciate the attention to detail and the way you immerse us in the local culture. Each video is an invitation to dream and plan our own adventures. Keep inspiring us with your incredible travel diaries!",
+                    "likes": 0,
+                    "timestamp": 1690175862000
+                  }
+            ]
+        };
+        console.log(postVideo);
+        const videoData = readVideos();
+        writeVideos([...videoData, postVideo]);
+        res.status(201).json(postVideo);
+    } catch (error) {
+        res.status(500).json({message: "Error while uploading video data"});
+    }
+});
 export default router;
