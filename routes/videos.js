@@ -32,6 +32,25 @@ router.get("/", (req, res)=> {
     }
 });
 
-
-
+router.get('/:id', (req, res) => {
+    try {
+        const { id } = req.params; 
+        const videosData = readVideos();
+    
+        const video = videosData.find(video => {
+            if(video.id === id){
+                video.image == video.image;
+                return video;
+            }
+        });
+    
+        if (!video) {
+            return res.status(400).send('No video Found with that id'); //return to halt the function execution
+        }
+        res.status(200).json(video);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({message: "Error while fetching video data"});
+    }
+});
 export default router;
