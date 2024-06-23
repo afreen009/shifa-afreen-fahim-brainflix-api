@@ -55,7 +55,6 @@ router.get('/:id', (req, res) => {
 });
 
 router.post("/", (req, res)=>{
-    console.log("came here", req.body);
     try {
         const {title, image, description} = req.body;
         console.log(req.body);
@@ -93,7 +92,6 @@ router.post("/", (req, res)=>{
                   }
             ]
         };
-        console.log(postVideo);
         const videoData = readVideos();
         writeVideos([...videoData, postVideo]);
         res.status(201).json(postVideo);
