@@ -45,7 +45,7 @@ router.get('/:id', (req, res) => {
         });
     
         if (!video) {
-            return res.status(400).send('No video Found with that id'); //return to halt the function execution
+            return res.status(400).send('No video Found with that id'); 
         }
         res.status(200).json(video);
     } catch (error) {
