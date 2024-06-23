@@ -57,7 +57,6 @@ router.get('/:id', (req, res) => {
 router.post("/", (req, res)=>{
     try {
         const {title, image, description} = req.body;
-        console.log(req.body);
         const postVideo = {
             id: uuid4(),
             title: title || "Video Title",
